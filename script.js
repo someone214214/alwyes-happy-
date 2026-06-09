@@ -1,50 +1,45 @@
-const pages = document.querySelectorAll(".page");
-
-function showPage(id){
-    pages.forEach(page=>{
-        page.classList.remove("active");
-    });
-
-    document.getElementById(id).classList.add("active");
-}
-
+const giftBox = document.getElementById("giftBox");
+const home = document.getElementById("home");
+const content = document.getElementById("content");
 const music = document.getElementById("music");
 
-// tombol buka amplop
-document.getElementById("startBtn").addEventListener("click",()=>{
+giftBox.addEventListener("click",()=>{
 
-    showPage("envelopePage");
+home.classList.remove("active");
+content.classList.add("active");
 
-    music.play().catch(()=>{});
-});
-
-// buka amplop
-document.getElementById("envelope").addEventListener("click",()=>{
-
-    document
-    .getElementById("envelope")
-    .classList.add("open");
-
-    setTimeout(()=>{
-        showPage("menuPage");
-    },1000);
+music.play().catch(()=>{});
 
 });
 
-// menu
-document.getElementById("galleryBtn").addEventListener("click",()=>{
-    showPage("galleryPage");
-});
+/* HUJAN LOVE */
 
-document.getElementById("letterBtn").addEventListener("click",()=>{
-    showPage("letterPage");
-});
+setInterval(()=>{
 
-// tombol kembali
-document.querySelectorAll(".backBtn").forEach(btn=>{
+const love = document.createElement("div");
 
-    btn.addEventListener("click",()=>{
-        showPage("menuPage");
-    });
+love.innerHTML = ["❤️","💕","💖","💗"][Math.floor(Math.random()*4)];
 
-});
+love.style.position="fixed";
+love.style.left=Math.random()*100+"vw";
+love.style.top="-50px";
+love.style.fontSize=(20+Math.random()*20)+"px";
+love.style.pointerEvents="none";
+
+document.body.appendChild(love);
+
+let pos=-50;
+
+const fall=setInterval(()=>{
+
+pos+=3;
+love.style.top=pos+"px";
+
+if(pos>window.innerHeight){
+clearInterval(fall);
+love.remove();
+}
+
+},20);
+
+},400);
